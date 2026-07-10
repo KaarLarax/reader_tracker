@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reader_tracker/models/book.dart';
 import 'package:reader_tracker/network/network.dart';
+import 'package:reader_tracker/utils/book_details_arguments.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -60,36 +61,46 @@ class _HomeScreenState extends State<HomeScreen> {
                       ).colorScheme.surfaceContainerHighest,
                       borderRadius: const BorderRadius.all(Radius.circular(4)),
                     ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Image.network(
-                            height: 200,
-                            width: 200,
-                            fit: BoxFit.cover,
-                            book.imageLinks["thumbnail"] ?? '',
+                    child: GestureDetector(
+                      onTap: () {
+                        print("Tapped on book: ${book.title}");
+                        Navigator.pushNamed(
+                          context,
+                          '/details',
+                          arguments: BookDetailsArguments(itemBook: book),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Image.network(
+                              height: 200,
+                              width: 200,
+                              fit: BoxFit.cover,
+                              book.imageLinks["thumbnail"] ?? '',
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            book.title,
-                            style: Theme.of(context).textTheme.titleSmall,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              book.title,
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            book.authors.join(", & ") ?? '',
-                            style: Theme.of(context).textTheme.bodySmall,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              book.authors.join(", & ") ?? '',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
