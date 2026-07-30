@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:reader_tracker/models/book.dart';
-import 'package:reader_tracker/network/network.dart';
 import 'package:reader_tracker/pages/book_details_screen.dart';
 import 'package:reader_tracker/pages/favorites_screen.dart';
 import 'package:reader_tracker/pages/home_screen.dart';

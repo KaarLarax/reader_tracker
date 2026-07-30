@@ -15,9 +15,46 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
     final args =
         ModalRoute.of(context)?.settings.arguments as BookDetailsArguments;
     final Book book = args.itemBook;
+    final theme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(title: const Text("Book Details")),
-      body: Center(child: Text(book.title)), // Display the book title for now
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              if (book.imageLinks["thumbnail"] != null)
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Image.network(
+                    height: 200,
+                    width: 150,
+                    fit: BoxFit.cover,
+                    book.imageLinks["thumbnail"] ?? '',
+                    errorBuilder: (_, __, ___) => const Icon(Icons.book),
+                  ),
+                ),
+              Column(
+                children: [
+                  Text(
+                    book.title,
+                    style: theme.titleLarge,
+                  ),
+                  Text(
+                    book.authors.join(", "),
+                    style: theme.labelLarge,
+                  ),
+                  Text("Publisher: ${book.publishedDate}",
+                    style: theme.bodyMedium,
+                  ),
+                  Text("Language: ${book.language}",
+                    style: theme.bodyMedium,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
