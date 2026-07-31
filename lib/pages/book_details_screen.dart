@@ -35,19 +35,40 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                 ),
               Column(
                 children: [
+                  Text(book.title, style: theme.titleLarge),
+                  Text(book.authors.join(", "), style: theme.labelLarge),
                   Text(
-                    book.title,
-                    style: theme.titleLarge,
-                  ),
-                  Text(
-                    book.authors.join(", "),
-                    style: theme.labelLarge,
-                  ),
-                  Text("Publisher: ${book.publishedDate}",
+                    "Publisher: ${book.publishedDate}",
                     style: theme.bodyMedium,
                   ),
-                  Text("Language: ${book.language}",
-                    style: theme.bodyMedium,
+                  Text("Language: ${book.language}", style: theme.bodyMedium),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(child: Text("Save"), onPressed: () {}),
+                      ElevatedButton.icon(
+                        icon: Icon(Icons.favorite),
+                        onPressed: () {},
+                        label: Text("favorite"),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Text('Description:', style: theme.titleMedium),
+                  SizedBox(height: 5),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.secondary.withOpacity(0.1),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                    child: Text(book.description != ''? book.description : 'No description available.',
+                        style: theme.bodyMedium),
                   ),
                 ],
               ),
